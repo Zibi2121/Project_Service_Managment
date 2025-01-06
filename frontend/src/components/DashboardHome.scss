@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+.dashboard-home {
+  padding: 20px;
+  display: grid;
+  /* 2 kolumny = 2 x 1fr */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  background-color: #f8f9fa; /* optionally, if you want a background */
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+
+  .dashboard-title {
+    /* Tytuł na całą szerokość (2 kolumny) */
+    grid-column: 1 / 3;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #111;
+    }
+
+    /* Donut chart – tutaj możesz zmienić max-width,
+       by donut był jeszcze większy */
+    .donut-chart-wrapper {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Wspólna reguła: Canvas max na 100% szerokości,
+       by nie wychodziło za ramy karty */
+    canvas {
+      max-width: 100%;
+    }
+
+    /* Lista powiadomień (jeśli masz "Ostatnie powiadomienia") */
+    .notifications-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin-bottom: 8px;
+        padding: 14px 0;
+        border-bottom: 2px solid #eee;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  /* Karta szeroka (span 2 kolumny) */
+  .card-wide {
+    grid-column: 1 / 3;
+
+    /* Kontener dla wykresu – aby ograniczyć wysokość */
+    .chart-box {
+      height: 300px; /* Tu ustalasz docelową wysokość wykresu */
+      margin-top: 10px;
+      position: relative;
+
+      canvas {
+        height: 100% !important; /* kluczowe wymuszenie */
+      }
+    }
+  }
+
+  /* Tabela wizyt w karcie - styl podstawowy */
+  .visits-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    margin-top: 10px;
+
+    thead {
+      background-color: #5466f1;
+      th {
+        color: #fff;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        /* Wyłączyć dolną granicę w thead,
+           jeśli chcesz, by tło thead stanowiło jedną całość */
+        border-bottom: none;
+      }
+    }
+
+    tbody {
+      tr {
+        /* Każdy wiersz ma dolną krawędź */
+        border-bottom: 1px solid #eee;
+
+        &:hover {
+          background-color: #fafafa;
+        }
+      }
+
+      td {
+        padding: 12px;
+        /* Ewentualnie:
+           border-right: 1px solid #eee;
+           by odseparować kolumny pionowo */
+      }
+    }
+    tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+    .add-note-btn {
+      background-color: #5466f1; /* lub #4285F4 albo inny niebieski */
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+  }
+}
+
+/* Responsywność: np. na telefonach 1 kolumna */
+@media (max-width: 768px) {
+  .dashboard-home {
+    grid-template-columns: 1fr; // 1 kolumna
+
+    .dashboard-title {
+      grid-column: 1 / 2;
+    }
+    .card-wide {
+      grid-column: 1 / 2;
+    }
+  }
+}

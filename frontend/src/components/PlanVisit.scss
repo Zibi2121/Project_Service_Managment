@@ -1,0 +1,186 @@
+/* Jeśli chcesz, możesz zaimportować wspólny font/zmienne, np.:
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+*/
+
+.plan-visit-container {
+  /* (Opcjonalnie) Jeżeli chcesz owinąć wszystko w dodatkowy kontener,
+     w .jsx możesz dać: <div className="plan-visit-container"> ... </div>
+     i tu stylizować.
+     Jeżeli nie, możesz pominąć ten blok i pisać reguły top-level. */
+}
+
+
+/* PRZYCISK "Dodaj wizytę" */
+.add-visit-btn {
+  background-color: #5466f1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: #4653c5;
+  }
+}
+
+/* TABELA WIZYT */
+.visits-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px; /* oddech pod tabelą */
+
+  thead {
+    background-color: #5466f1;
+    th {
+      color: #fff;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      /* Brak dolnej linii => thead będzie jednolitym kolorem */
+      border-bottom: none;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.2s;
+      &:hover {
+        background-color: #fafafa; /* delikatny hover w wierszach */
+      }
+    }
+    td {
+      padding: 12px;
+      /* Możesz dodać text-align: center; w zależności od kolumny,
+         np. &:nth-child(2) { text-align: center; } */
+    }
+  }
+}
+
+/* PRZYCISKI EDYCJI/USUWANIA W TABELI */
+.visits-table td button {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  /* Domyślnie: tło jasnoszare, ciemnoszary tekst */
+  background-color: #ddd;
+  color: #333;
+
+  &:hover {
+    background-color: #ccc;
+  }
+
+  /* Jeżeli chcesz Modyfikuj i Usuń różnić kolorami,
+     można je rozróżnić np. po "innerText" – ale CSS nie ma wbudowanej
+     selekcji tekstu.
+     Lepiej dodać unikatowe klasy.
+     Ewentualnie :first-child i :last-child,
+     ale to mniej bezpieczne.
+     Zalecane rozwiązanie: w JSX dać 2 osobne klasy. */
+}
+
+/* PRZYKŁAD Z DWIEMA KLASAMI: .edit-btn, .delete-btn */
+.visits-table td .edit-btn {
+  background-color: #fbc02d; /* żółty */
+  color: #fff;
+  &:hover {
+    background-color: #f9a825; /* ciemniejszy żółty */
+  }
+}
+
+.visits-table td .delete-btn {
+  background-color: #e53935; /* czerwony */
+  color: #fff;
+  &:hover {
+    background-color: #c62828; /* ciemniejszy czerwony */
+  }
+}
+
+/* MODAL (POPUP) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px; /* lub inny rozmiar */
+    max-width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+
+        /* Odrobinę miejsca między etykietą a inputem */
+        input, select {
+          margin-top: 5px;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+        }
+      }
+      .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+
+        .confirm-btn {
+          background-color: #5466f1;
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          padding: 8px 14px;
+          cursor: pointer;
+          &:hover {
+            background-color: #4653c5;
+          }
+        }
+        .cancel-btn {
+          background-color: #ddd;
+          border: none;
+          border-radius: 6px;
+          padding: 8px 14px;
+          cursor: pointer;
+          &:hover {
+            background-color: #ccc;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* (Opcjonalnie) Responsywność modal */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+  }
+}
